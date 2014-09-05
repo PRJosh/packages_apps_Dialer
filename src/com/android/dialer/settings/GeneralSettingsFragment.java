@@ -49,6 +49,7 @@ public class GeneralSettingsFragment extends PreferenceFragment
     private static final String BUTTON_VIBRATE_ON_RING = "button_vibrate_on_ring";
     private static final String BUTTON_PLAY_DTMF_TONE  = "button_play_dtmf_tone";
     private static final String BUTTON_RESPOND_VIA_SMS_KEY = "button_respond_via_sms_key";
+    private static final String BUTTON_SPEED_DIAL_KEY  = "speed_dial_settings";
 
     private static final int MSG_UPDATE_RINGTONE_SUMMARY = 1;
 
@@ -58,6 +59,7 @@ public class GeneralSettingsFragment extends PreferenceFragment
     private SwitchPreference mVibrateWhenRinging;
     private SwitchPreference mPlayDtmfTone;
     private Preference mRespondViaSms;
+    private Preference mSpeedDialSettings;
 
     private Runnable mRingtoneLookupRunnable;
     private final Handler mRingtoneLookupComplete = new Handler() {
@@ -83,6 +85,7 @@ public class GeneralSettingsFragment extends PreferenceFragment
         mVibrateWhenRinging = (SwitchPreference) findPreference(BUTTON_VIBRATE_ON_RING);
         mPlayDtmfTone = (SwitchPreference) findPreference(BUTTON_PLAY_DTMF_TONE);
         mRespondViaSms = findPreference(BUTTON_RESPOND_VIA_SMS_KEY);
+        mSpeedDialSettings = findPreference(BUTTON_SPEED_DIAL_KEY);
 
         PreferenceCategory soundCategory = (PreferenceCategory) findPreference(CATEGORY_SOUNDS_KEY);
         Vibrator vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
@@ -145,7 +148,7 @@ public class GeneralSettingsFragment extends PreferenceFragment
      */
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mRespondViaSms) {
+        if (preference == mRespondViaSms || preference == mSpeedDialSettings) {
             // Needs to return false for the intent to launch.
             return false;
         }
